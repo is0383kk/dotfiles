@@ -158,11 +158,17 @@
   "scm.inputFontFamily": "editor", // コミットメッセージをエディターと同じフォントに設定
 
   /*
-      マークダウンファイル関連設定
+      Markdown関連設定
     */
   "[markdown]": {
     "files.trimTrailingWhitespace": false
   },
+  "markdown.validate.enabled": true, // リンク切れや存在しない見出しへの参照を警告
+  "markdown.updateLinksOnFileMove.enabled": "prompt", // ファイル移動時にリンクを更新するか確認
+  "markdown.suggest.paths.includeWorkspaceHeaderCompletions": "onSingleOrDoubleHash", // # または ## で見出し補完を表示
+  "markdown.preview.scrollPreviewWithEditor": true, // エディタのスクロールにプレビューを同期
+  "markdown.preview.scrollEditorWithPreview": true, // プレビューのスクロールにエディタを同期
+
   /*
       Python関連設定
     */
