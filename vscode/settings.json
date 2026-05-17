@@ -14,13 +14,12 @@
   "workbench.colorTheme": "Dark Modern", // 標準のダークテーマ
   "workbench.iconTheme": "material-icon-theme", // 【拡張機能】Material Icon Theme：https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme
   "material-icon-theme.folders.color": "#f0e68c", // フォルダアイコンの色
-  "material-icon-theme.files.color": "#a9a9a9", // ファイルアイコンの色
 
   /*
       workbench設定
     */
   "workbench.settings.useSplitJSON": false, // 設定画面からsetting.jsonを編集する際デフォルト設定とユーザ設定を同時に開く機能を無効化
-  "workbench.editor.enablePreview": true, // 未編集ファイルが勝手に閉じられるのを防止
+  "workbench.editor.enablePreview": true, // プレビュータブ機能を有効化（別ファイルを開くとプレビュータブが置き換えられる）
   "workbench.editor.tabSizing": "shrink", // エディタ上部の開いているファイルのタブサイズ
   "workbench.editor.pinnedTabsOnSeparateRow": true, // ピン止めされたタブがピン止めされていないタブの上に表示
   "workbench.editor.wrapTabs": true, // タブが画面幅を超えたときに折り返す
@@ -74,7 +73,7 @@
   "editor.autoClosingQuotes": "always", // 引用符を自動的に閉じる
   "editor.autoSurround": "quotes", // 自動的に引用符で囲む
   "editor.formatOnSave": true, // ファイル保存時に自動的にコードをフォーマット
-  "editor.formatOnType": true, // コードを入力するたびに自動的にフォーマット
+  "editor.formatOnType": false, // 入力中のフォーマットは無効化（保存時のformatOnSaveで十分なため）
   "editor.dragAndDrop": false, // テキストのドラッグアンドドロップ
   "editor.emptySelectionClipboard": false, // 誤って空の行をコピーできなくする
   "editor.copyWithSyntaxHighlighting": false, // コードをコピーするときにシンタックスハイライトをコピーしない
@@ -83,12 +82,10 @@
   "editor.bracketPairColorization.enabled": true, // カッコのペアを色分けして表示
   "editor.mouseWheelZoom": true, // Ctrl+マウスホイールでエディターをズーム
   "editor.links": true, // ファイル内リンクをクリック可能に
-  "editor.accessibilitySupport": "off", // 音をオフに
+  "editor.accessibilitySupport": "off", // スクリーンリーダー向けのUI最適化を無効化
   "editor.largeFileOptimizations": true, // 大きなファイルの読み込みを最適化
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "always", // 未使用のインポートを消す
-    "source.fixAll.eslint": "always" // ESLintの自動修正を有効化
-  },
+  // editor.codeActionsOnSaveはグローバルでは設定せず、言語固有設定で個別に指定する
+  // （グローバル設定だと全言語で実行され、言語固有のオーガナイザーと競合するため）
   "editor.cursorBlinking": "blink", // カーソルの点滅アニメーション
   "editor.cursorWidth": 3, // カーソル幅
   "editor.cursorSmoothCaretAnimation": "explicit", // カーソルのアニメーション
@@ -114,7 +111,7 @@
   "files.insertFinalNewline": true, // ファイルの最後に自動的に改行を追加
   "files.trimFinalNewlines": true, // ファイルの末尾の余分な改行を削除
   "files.trimTrailingWhitespace": true, // 行末の空白を自動的に削除
-  "files.autoGuessEncoding": true, //ファイルのエンコーディングを自動で推測
+  "files.encoding": "utf8", // ファイルのエンコーディングをUTF-8に固定
 
   /*
       ウィンドウ関連設定
@@ -145,7 +142,7 @@
   "terminal.integrated.mouseWheelZoom": true, // Ctrl+マウスホイールでエディターをズーム
   "terminal.integrated.smoothScrolling": false, // スクロールを滑らかにする
   "terminal.integrated.gpuAcceleration": "off", // GPUアクセラレーション
-  "terminal.integrated.shellIntegration.enabled": false, // シェル統合
+  "terminal.integrated.shellIntegration.enabled": true, // シェル統合を有効化（Claude Code等のターミナル統合機能で必要）
 
   /*
       ソース管理タブ設定
@@ -168,10 +165,9 @@
   "python.analysis.autoSearchPaths": true, // 自動でパスの検索を有効化
   "python.analysis.autoImportCompletions": true, // 自動インポート候補を表示
   "python.analysis.userFileIndexingLimit": 6000, // ユーザーがインデックスに登録できるファイルの上限
-  "python.analysis.diagnosticMode": "workspace", // 開いているファイルのみの診断を実行
+  "python.analysis.diagnosticMode": "workspace", // ワークスペース全体のファイルに対して診断を実行
   //"python.analysis.typeCheckingMode": "standard", // 基本的な型チェックを有効化
   "python.testing.pytestEnabled": true, // pytestをテストフレームワークとして有効化
-  "python.testing.pytestArgs": ["--cov=.", "--cov-report", "xml"], // pytest実行時の引数設定
   "python.testing.autoTestDiscoverOnSaveEnabled": true, // 保存時にテストを自動的に再検出
   "coverage-gutters.showGutterCoverage": true, // コードカバレッジの結果をサイドバーのライン番号に表示
   "coverage-gutters.showLineCoverage": true, // 各行のカバレッジ結果を行番号に表示
@@ -224,8 +220,12 @@
   /*
       TypeScript/JavaScript関連設定
     */
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always", // 未使用のインポートを消す
+      "source.fixAll.eslint": "always" // ESLintの自動修正を有効化
+    }
   },
   // JSXの中でも自動インポートをより賢く
   "js/ts.preferences.importModuleSpecifier": "non-relative",
@@ -242,9 +242,7 @@
     Tailwind CSS関連設定
     */
   "tailwindCSS.includeLanguages": {
-    "plaintext": "html",
-    "typescript": "javascript",
-    "typescriptreact": "javascript"
+    "plaintext": "html"
   },
   "tailwindCSS.experimental.classRegex": [
     "twMerge\\(([^)]*)\\)", // twMerge対応
