@@ -29,6 +29,7 @@
   "workbench.sideBar.location": "left", // サイドバーを左に
   "workbench.list.smoothScrolling": true, // サイドバーのスクロールを滑らかにする
   "workbench.view.alwaysShowHeaderActions": true, // サイドバーのヘッダーアクションを常に表示
+  "workbench.tree.renderIndentGuides": "always", // ツリーのインデントガイドを常に表示
 
   /*
     各種色の設定
@@ -39,11 +40,12 @@
     "editor.lineHighlightBackground": "#525252", // 編集中の行の強調表示色
     "editor.selectionBackground": "#0004ff", // 選択範囲（ドラック操作やShift+矢印キーや全選択での選択）の色
     "editor.selectionHighlightBorder": "#fffb00", // ハイライト選択範囲の枠線
-    "editorCursor.foreground": "#dddcc3c4", // カーソルの色
+    "editorCursor.foreground": "#dddcc3c4", // カーソルの色(エディタ)
     "editor.wordHighlightBackground": "#3838386e", // カーソルがある単語や一致する部分の強調色
     "editorBracketMatch.border": "#fffb00", // カッコや括弧ペアの強調表示枠線
     "editorWarning.background": "#817f0028", // 警告箇所の背景色
-    "editorError.background": "#8e00003c" // エラー箇所の背景色
+    "editorError.background": "#8e00003c", // エラー箇所の背景色
+    "terminalCursor.foreground": "#dddcc3c4" // カーソルの色(ターミナル)
   },
 
   /*
@@ -84,10 +86,11 @@
   "editor.links": true, // ファイル内リンクをクリック可能に
   "editor.accessibilitySupport": "off", // スクリーンリーダー向けのUI最適化を無効化
   "editor.largeFileOptimizations": true, // 大きなファイルの読み込みを最適化
+  "editor.suggest.snippetsPreventQuickSuggestions": false, // スニペットのサジェストがクイックサジェストを妨げないようにする
   // editor.codeActionsOnSaveはグローバルでは設定せず、言語固有設定で個別に指定する
   // （グローバル設定だと全言語で実行され、言語固有のオーガナイザーと競合するため）
+  "editor.cursorStyle": "block", // カーソルのスタイルをブロックに設定
   "editor.cursorBlinking": "blink", // カーソルの点滅アニメーション
-  "editor.cursorWidth": 3, // カーソル幅
   "editor.cursorSmoothCaretAnimation": "explicit", // カーソルのアニメーション
 
   /*
@@ -112,6 +115,7 @@
   "files.trimFinalNewlines": true, // ファイルの末尾の余分な改行を削除
   "files.trimTrailingWhitespace": true, // 行末の空白を自動的に削除
   "files.encoding": "utf8", // ファイルのエンコーディングをUTF-8に固定
+  "files.autoSave": "onFocusChange", // フォーカスがエディタから外れたときに自動保存
 
   /*
       ウィンドウ関連設定
@@ -143,6 +147,7 @@
   "terminal.integrated.smoothScrolling": false, // スクロールを滑らかにする
   "terminal.integrated.gpuAcceleration": "off", // GPUアクセラレーション
   "terminal.integrated.shellIntegration.enabled": true, // シェル統合を有効化（Claude Code等のターミナル統合機能で必要）
+  "terminal.integrated.rightClickBehavior": "paste", // ターミナルで右クリックしたときにペーストする
 
   /*
       ソース管理タブ設定
@@ -227,16 +232,14 @@
       "source.fixAll.eslint": "always" // ESLintの自動修正を有効化
     }
   },
-  // JSXの中でも自動インポートをより賢く
-  "js/ts.preferences.importModuleSpecifier": "non-relative",
-  // JSX属性などの入力補助
-  "editor.parameterHints.enabled": true,
-  "editor.inlineSuggest.enabled": true,
-  "editor.codeLens": true,
-  "js/ts.inlayHints.parameterNames.enabled": "all",
-  "js/ts.inlayHints.variableTypes.enabled": true,
-  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
-  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "js/ts.preferences.importModuleSpecifier": "non-relative", // インポートのパスを相対パスではなく、プロジェクトルートからの絶対パスにする
+  "editor.parameterHints.enabled": true, // パラメータヒントを有効化（関数の引数の型や説明を表示）
+  "editor.inlineSuggest.enabled": true, // インラインサジェストを有効化（コードの途中にサジェストを表示）
+  "editor.codeLens": true, // コードレンズを有効化（関数の呼び出し回数などを表示）
+  "js/ts.inlayHints.parameterNames.enabled": "all", // 関数の引数名を常に表示
+  "js/ts.inlayHints.variableTypes.enabled": true, // 変数の型を表示
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true, // 関数の戻り値の型を表示
+  "js/ts.updateImportsOnFileMove.enabled": "always", // ファイル移動時にインポートパスを自動更新
 
   /*
     Tailwind CSS関連設定
