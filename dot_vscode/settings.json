@@ -6,6 +6,11 @@
     ・YAML：https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
     ・Even Better TOML：https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
     ・Prettier - Code formatter：https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+    ・Python：https://marketplace.visualstudio.com/items?itemName=ms-python.python
+    ・Coverage Gutters：https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters
+    ・ESLint：https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+    ・Tailwind CSS IntelliSense：https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+    ・GitHub Copilot：https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
     */
 
   /*
@@ -30,6 +35,7 @@
   "workbench.list.smoothScrolling": true, // サイドバーのスクロールを滑らかにする
   "workbench.view.alwaysShowHeaderActions": true, // サイドバーのヘッダーアクションを常に表示
   "workbench.tree.renderIndentGuides": "always", // ツリーのインデントガイドを常に表示
+  "workbench.secondarySideBar.defaultVisibility": "hidden", // 起動時に右側のセカンダリサイドバー（Chat欄）を非表示にする
 
   /*
     各種色の設定

@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "PKief.material-icon-theme",
+    "charliermarsh.ruff",
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml",
+    "esbenp.prettier-vscode",
+    "ms-python.python",
+    "ryanluker.vscode-coverage-gutters",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "GitHub.copilot"
+  ]
+}
