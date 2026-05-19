@@ -1,13 +1,19 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "CLAUDE_CODE_USE_BEDROCK": "1",
-    "AWS_REGION": "us-east-1",
     "LANG": "ja_JP.UTF-8",
-    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1"
+    "AWS_REGION": "us-east-1",
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1",
+    "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+    "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "sonnet"
   },
   "language": "japanese",
   "model": "us.anthropic.claude-opus-4-7",
+  "effortLevel": "high",
+  "alwaysThinkingEnabled": true,
+  "plansDirectory": "./docs/plans",
   "permissions": {
     "defaultMode": "acceptEdits",
     "allow": [
@@ -50,6 +56,9 @@
       "Write(**/secrets/**)"
     ]
   },
+  "enabledPlugins": {
+    "example-skills@anthropic-agent-skills": true
+  },
   "hooks": {
     "Stop": [
       {
@@ -57,7 +66,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; New-BurntToastNotification -Text 'ClaudeCode', 'The process is complete' -Sound Default\""
+            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; Add-Type -AssemblyName presentationCore; \\$p = New-Object System.Windows.Media.MediaPlayer; \\$p.Volume = 0.3; \\$p.Open([uri]('file:///' + \\$env:USERPROFILE.Replace('\\','/') + '/.claude/sounds/stop.wav')); \\$p.Play(); \\$b = New-BTBinding -Children (New-BTText -Text 'ClaudeCode'),(New-BTText -Text 'The process is complete'); \\$c = New-BTContent -Visual (New-BTVisual -BindingGeneric \\$b) -Audio (New-BTAudio -Silent); Submit-BTNotification -Content \\$c; Start-Sleep -Seconds 3\""
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; New-BurntToastNotification -Text 'ClaudeCode', 'API error occurred' -Sound Default\""
           }
         ]
       }
@@ -68,18 +88,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; New-BurntToastNotification -Text 'ClaudeCode', 'Claude Code has requested confirmation' -Sound Default\""
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "error",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; New-BurntToastNotification -Text 'ClaudeCode', 'An error occurred' -Sound Default\""
+            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; Add-Type -AssemblyName presentationCore; \\$p = New-Object System.Windows.Media.MediaPlayer; \\$p.Volume = 0.3; \\$p.Open([uri]('file:///' + \\$env:USERPROFILE.Replace('\\','/') + '/.claude/sounds/notification-permission_prompt.wav')); \\$p.Play(); \\$b = New-BTBinding -Children (New-BTText -Text 'ClaudeCode'),(New-BTText -Text 'Claude Code has requested confirmation'); \\$c = New-BTContent -Visual (New-BTVisual -BindingGeneric \\$b) -Audio (New-BTAudio -Silent); Submit-BTNotification -Content \\$c; Start-Sleep -Seconds 3\""
           }
         ]
       }
@@ -88,11 +97,5 @@
   "statusLine": {
     "type": "command",
     "command": "npx ccusage@latest statusline"
-  },
-  "enabledPlugins": {
-    "example-skills@anthropic-agent-skills": true
-  },
-  "alwaysThinkingEnabled": true,
-  "plansDirectory": "./cc_plans",
-  "autoMemoryEnabled": false
+  }
 }
