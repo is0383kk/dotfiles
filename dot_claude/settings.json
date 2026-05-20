@@ -65,7 +65,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; Add-Type -AssemblyName presentationCore; \\$p = New-Object System.Windows.Media.MediaPlayer; \\$p.Volume = 0.3; \\$p.Open([uri]('file:///' + \\$env:USERPROFILE.Replace('\\','/') + '/.claude/sounds/stop.wav')); \\$p.Play(); \\$b = New-BTBinding -Children (New-BTText -Text 'ClaudeCode'),(New-BTText -Text 'The process is complete'); \\$c = New-BTContent -Visual (New-BTVisual -BindingGeneric \\$b) -Audio (New-BTAudio -Silent); Submit-BTNotification -Content \\$c; Start-Sleep -Seconds 3\""
+            "shell": "powershell",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File \"$env:USERPROFILE\\.agents\\hooks\\notify-stop.ps1\""
           }
         ]
       }
@@ -76,7 +77,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; New-BurntToastNotification -Text 'ClaudeCode', 'API error occurred' -Sound Default\""
+            "shell": "powershell",
+            "command": "Import-Module BurntToast; New-BurntToastNotification -Text 'ClaudeCode', 'Error occurred' -Sound Default"
           }
         ]
       }
@@ -87,7 +89,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -ExecutionPolicy RemoteSigned -Command \"Import-Module BurntToast; Add-Type -AssemblyName presentationCore; \\$p = New-Object System.Windows.Media.MediaPlayer; \\$p.Volume = 0.3; \\$p.Open([uri]('file:///' + \\$env:USERPROFILE.Replace('\\','/') + '/.claude/sounds/notification-permission_prompt.wav')); \\$p.Play(); \\$b = New-BTBinding -Children (New-BTText -Text 'ClaudeCode'),(New-BTText -Text 'Claude Code has requested confirmation'); \\$c = New-BTContent -Visual (New-BTVisual -BindingGeneric \\$b) -Audio (New-BTAudio -Silent); Submit-BTNotification -Content \\$c; Start-Sleep -Seconds 3\""
+            "shell": "powershell",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File \"$env:USERPROFILE\\.agents\\hooks\\notify-permission-request.ps1\""
           }
         ]
       }
