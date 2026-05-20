@@ -1,0 +1,72 @@
+# ~/.codex/config.toml
+
+################################################################################
+# Core / Auth / Model
+################################################################################
+
+forced_login_method = "chatgpt"
+model_provider = "openai"
+
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+model_reasoning_summary = "auto"
+model_verbosity = "high"
+
+developer_instructions = '''
+常に日本語で応答してください。
+作業計画・実装計画をファイル化する場合は、原則として ./docs/plans を使用してください。
+機密情報に見えるファイル、.env、秘密鍵、トークン、パスワード、secret、.ssh 配下にはアクセスしないでください。
+sudo を使うコマンドは提案・実行しないでください。
+'''
+
+web_search = "cached"
+
+################################################################################
+# Approval / Sandbox
+################################################################################
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = false
+
+[windows]
+sandbox = "elevated"
+
+################################################################################
+# Shell environment
+################################################################################
+
+[shell_environment_policy.set]
+LANG = "ja_JP.UTF-8"
+
+################################################################################
+# Features
+################################################################################
+
+[features]
+hooks = true
+shell_tool = true
+multi_agent = true
+
+################################################################################
+# Hooks
+################################################################################
+
+[[hooks.Stop]]
+
+[[hooks.Stop.hooks]]
+type = "command"
+timeout = 10
+statusMessage = "Sending completion notification"
+command = 'powershell -NoProfile -ExecutionPolicy RemoteSigned -File "$env:USERPROFILE\.agents\hooks\notify-stop.ps1"'
+
+[[hooks.PermissionRequest]]
+matcher = ".*"
+
+[[hooks.PermissionRequest.hooks]]
+type = "command"
+timeout = 10
+statusMessage = "Sending permission request notification"
+command = 'powershell -NoProfile -ExecutionPolicy RemoteSigned -File "$env:USERPROFILE\.agents\hooks\notify-permission-request.ps1"'
