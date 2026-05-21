@@ -1,0 +1,53 @@
+{
+  // Claude Code の effortLevel: high 相当
+  // Copilot CLI では "low" | "medium" | "high" | "xhigh" が利用可能
+  "effortLevel": "high",
+
+  // 利用可能モデルは Copilot 契約・組織設定で変わるため auto 推奨
+  // 明示したい場合は /model で選択後、この値を書き換える
+  "model": "auto",
+
+  // Claude Code の language: japanese 相当は専用キーがないため、
+  // ~/.copilot/copilot-instructions.md 側で指定する
+  "askUser": true,
+  "stream": true,
+  "renderMarkdown": true,
+  "respectGitignore": true,
+
+  // statusLine は要件どおり除外
+  // footer / statusLine は設定しない
+
+  // Hooks を有効化
+  "disableAllHooks": false,
+
+  // Claude Code の hooks 通知を Copilot CLI のイベント名へ移植
+  // Stop           -> agentStop
+  // StopFailure    -> errorOccurred
+  // Notification(permission_prompt) -> notification + matcher: permission_prompt
+  "hooks": {
+    "agentStop": [
+      {
+        "type": "command",
+        "powershell": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\.agents\\hooks\\notify-stop.ps1\"",
+        "timeoutSec": 10
+      }
+    ],
+
+    "errorOccurred": [
+      {
+        "type": "command",
+        "powershell": "Import-Module BurntToast; New-BurntToastNotification -Text 'GitHub Copilot CLI', 'API error occurred' -Sound Default",
+        "timeoutSec": 10
+      }
+    ],
+
+    "notification": [
+      {
+        "type": "command",
+        "matcher": "permission_prompt",
+        "powershell": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\.agents\\hooks\\notify-permission-request.ps1\"",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
