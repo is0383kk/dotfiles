@@ -66,7 +66,7 @@
           {
             "type": "command",
             "shell": "powershell",
-            "command": "powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File \"$env:USERPROFILE\\.agents\\hooks\\notify-stop.ps1\""
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\.agents\\hooks\\notify-stop.ps1\""
           }
         ]
       }
@@ -90,7 +90,7 @@
           {
             "type": "command",
             "shell": "powershell",
-            "command": "powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File \"$env:USERPROFILE\\.agents\\hooks\\notify-permission-request.ps1\""
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\.agents\\hooks\\notify-permission-request.ps1\""
           }
         ]
       }
