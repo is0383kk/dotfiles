@@ -112,6 +112,7 @@
     */
   "explorer.incrementalNaming": "smart", // 新しいファイルやフォルダを作成する際に同名ファイルがある場合数字を加算して名前付け
   "explorer.compactFolders": false, // エクスプローラーで単一の子フォルダを持つフォルダをコンパクトに表示しない
+  "explorer.copyRelativePathSeparator": "/", // 相対パスをコピーする際の区切り文字をスラッシュに設定
 
   /*
       ファイル関連設定
