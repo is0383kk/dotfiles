@@ -52,8 +52,8 @@
       "Read(**/*password*)",
       "Read(**/*secret*)",
       "Read(**/.ssh/**)",
-      "Write(.env*)",
-      "Write(**/secrets/**)"
+      "Edit(.env*)",
+      "Edit(**/secrets/**)"
     ]
   },
   "enabledPlugins": {

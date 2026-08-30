@@ -57,7 +57,6 @@
 # エージェントスキル作成
 
 - スキル作成の際、プロジェクト固有のもの（`<repo>/.claude/skills/`）として作成する
-- スキル作成後、`https://agentskills.io/skill-creation/best-practices`に従いレビューと修正を行うこと
 - スキル作成後の検証を行う際はユーザに確認する
 
 # 最終報告
