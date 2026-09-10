@@ -41,7 +41,7 @@
     各種色の設定
     */
   "workbench.colorCustomizations": {
-    "tab.activeBackground": "#080034", // 表示されているタブの背景色
+    "tab.activeBackground": "#ae00ff6e", // 表示されているタブの背景色
     "editorLineNumber.activeForeground": "#fffb00", // 編集中の行番号の色
     "editor.lineHighlightBackground": "#525252", // 編集中の行の強調表示色
     "editor.selectionBackground": "#0004ff", // 選択範囲（ドラック操作やShift+矢印キーや全選択での選択）の色
@@ -95,7 +95,7 @@
   "editor.suggest.snippetsPreventQuickSuggestions": false, // スニペットのサジェストがクイックサジェストを妨げないようにする
   // editor.codeActionsOnSaveはグローバルでは設定せず、言語固有設定で個別に指定する
   // （グローバル設定だと全言語で実行され、言語固有のオーガナイザーと競合するため）
-  "editor.cursorStyle": "block", // カーソルのスタイルをブロックに設定
+  "editor.cursorStyle": "line", // カーソルのスタイルをブロックに設定
   "editor.cursorBlinking": "blink", // カーソルの点滅アニメーション
   "editor.cursorSmoothCaretAnimation": "explicit", // カーソルのアニメーション
 
