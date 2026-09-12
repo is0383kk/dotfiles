@@ -1,11 +1,7 @@
-# ~/.codex/config.toml
+#:schema https://developers.openai.com/codex/config-schema.json
 
-################################################################################
 # Core / Auth / Model
-################################################################################
-
-forced_login_method = "chatgpt"
-model_provider = "openai"
+model_provider = "amazon-bedrock"
 
 model = "gpt-5.5"
 model_reasoning_effort = "high"
@@ -21,10 +17,8 @@ sudo を使うコマンドは提案・実行しないでください。
 
 web_search = "cached"
 
-################################################################################
-# Approval / Sandbox
-################################################################################
 
+# Approval / Sandbox
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
@@ -34,26 +28,15 @@ network_access = false
 [windows]
 sandbox = "elevated"
 
-################################################################################
-# Shell environment
-################################################################################
 
-[shell_environment_policy.set]
-LANG = "ja_JP.UTF-8"
-
-################################################################################
 # Features
-################################################################################
-
 [features]
 hooks = true
 shell_tool = true
 multi_agent = true
 
-################################################################################
-# Hooks
-################################################################################
 
+# Hooks
 [[hooks.Stop]]
 
 [[hooks.Stop.hooks]]
