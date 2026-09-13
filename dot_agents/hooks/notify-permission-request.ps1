@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 Import-Module BurntToast
 Add-Type -AssemblyName presentationCore
 
-$soundPath = Join-Path $env:USERPROFILE '.agents\hooks\sounds\notification-permission_prompt.wav'
+$soundPath = Join-Path $env:USERPROFILE '.agents\hooks\sounds\notification-permission_prompt-001.wav'
 $player = New-Object System.Windows.Media.MediaPlayer
 $player.Volume = 0.3
 $player.Open([uri]$soundPath)

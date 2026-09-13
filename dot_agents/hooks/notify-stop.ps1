@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 Import-Module BurntToast
 Add-Type -AssemblyName presentationCore
 
-$soundPath = Join-Path $env:USERPROFILE '.agents\hooks\sounds\stop.wav'
+$soundPath = Join-Path $env:USERPROFILE '.agents\hooks\sounds\stop-001.wav'
 $player = New-Object System.Windows.Media.MediaPlayer
 $player.Volume = 0.3
 $player.Open([uri]$soundPath)
